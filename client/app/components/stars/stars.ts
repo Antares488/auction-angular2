@@ -28,7 +28,6 @@ export default class StarsComponent {
   ratingChange: EventEmitter<number> = new EventEmitter();
 
   fillStarsWithColor(index) {
-
     if (!this.readonly) {
       this.rating = index + 1;
       this.ratingChange.emit(this.rating);

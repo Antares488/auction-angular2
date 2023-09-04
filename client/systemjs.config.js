@@ -1,28 +1,30 @@
 System.config({
   transpiler: 'typescript',
-  typescriptOptions: {emitDecoratorMetadata: true,
-    target: "ES5",
-    module: "commonjs"},
+  typescriptOptions: {emitDecoratorMetadata: true},
   map: {
-    '@angular': 'node_modules/@angular',
-    'rxjs'    : 'node_modules/rxjs'
+    'rxjs': 'node_modules/rxjs',
+
+    '@angular/common'                  : 'ng:common/bundles/common.umd.js',
+    '@angular/compiler'                : 'ng:compiler/bundles/compiler.umd.js',
+    '@angular/core'                    : 'ng:core/bundles/core.umd.js',
+    '@angular/forms'                   : 'ng:forms/bundles/forms.umd.js',
+    '@angular/http'                    : 'ng:http/bundles/http.umd.js',
+    '@angular/platform-browser'        : 'ng:platform-browser/bundles/platform-browser.umd.js',
+    '@angular/platform-browser-dynamic': 'ng:platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
+    '@angular/router'                  : 'ng:router/bundles/router.umd.js',
+
+    '@angular/common/testing'                  : 'ng:common/bundles/common-testing.umd.js',
+    '@angular/compiler/testing'                : 'ng:compiler/bundles/compiler-testing.umd.js',
+    '@angular/core/testing'                    : 'ng:core/bundles/core-testing.umd.js',
+    '@angular/http/testing'                    : 'ng:http/bundles/http-testing.umd.js',
+    '@angular/platform-browser/testing'        : 'ng:platform-browser/bundles/platform-browser-testing.umd.js',
+    '@angular/platform-browser-dynamic/testing': 'ng:platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
   },
   paths: {
-    'node_modules/@angular/*': 'node_modules/@angular/*/bundles'
-  },
-  meta: {
-    '@angular/*': {'format': 'cjs'}
+    'ng:': 'node_modules/@angular/'
   },
   packages: {
-    'app'                              : {main: 'main', defaultExtension: 'ts'},
-    'rxjs'                             : {main: 'Rx'},
-    '@angular/core'                    : {main: 'core.umd.min.js'},
-    '@angular/common'                  : {main: 'common.umd.min.js'},
-    '@angular/compiler'                : {main: 'compiler.umd.min.js'},
-    '@angular/router'                  : {main: 'router.umd.min.js'},
-    '@angular/forms'                  : {main: 'forms.umd.min.js'},
-    '@angular/http'                  : {main: 'http.umd.min.js'},
-    '@angular/platform-browser'        : {main: 'platform-browser.umd.min.js'},
-    '@angular/platform-browser-dynamic': {main: 'platform-browser-dynamic.umd.min.js'}
+    'app' : {main: 'main', defaultExtension: 'ts'},
+    'rxjs': {main: 'index'}
   }
 });

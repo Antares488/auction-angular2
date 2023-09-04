@@ -1,10 +1,16 @@
 "use strict";
+var __spreadArrays = (this && this.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var express = require("express");
 var path = require("path");
 var ws_1 = require("ws");
 var model_1 = require("./model");
-
 var app = express();
 app.use('/', express.static(path.join(__dirname, '..', 'client')));
 app.use('/node_modules', express.static(path.join(__dirname, '..', 'node_modules')));
@@ -21,7 +27,6 @@ var httpServer = app.listen(8000, 'localhost', function () {
     var _a = httpServer.address(), address = _a.address, port = _a.port;
     console.log('Listening on %s %s', address, port);
 });
-
 var wsServer = new ws_1.Server({ server: httpServer });
 wsServer.on('connection', function (ws) {
     ws.on('message', function (message) {
@@ -36,9 +41,8 @@ setInterval(function () {
 var subscriptions = new Map();
 function subscribeToProductBids(client, productId) {
     var products = subscriptions.get(client) || [];
-    subscriptions.set(client, products.concat([productId]));
+    subscriptions.set(client, __spreadArrays(products, [productId]));
 }
-
 var currentBids = new Map();
 function generateNewBids() {
     model_1.getProducts().forEach(function (p) {
