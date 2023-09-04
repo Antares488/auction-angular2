@@ -48,14 +48,7 @@ function getReviewsByProductId(productId) {
 }
 exports.getReviewsByProductId = getReviewsByProductId;
 var products = [
-    {
-        "id": 0,
-        "title": 'First Product',
-        "price": 24.99,
-        "rating": 4.3,
-        "description": 'This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        "categories": ['electronics', 'hardware']
-    },
+    new Product(0, 'First Product', 24.99, 4.3, 'This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.', ['electronics', 'hardware']),
     {
         "id": 1,
         "title": "Second Product",

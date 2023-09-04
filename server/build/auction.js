@@ -1,24 +1,25 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var express = require("express");
+var compression = require("compression");
 var path = require("path");
 var ws_1 = require("ws");
 var model_1 = require("./model");
 var app = express();
-app.use('/', express.static(path.join(__dirname, '..', 'client')));
-app.use('/node_modules', express.static(path.join(__dirname, '..', 'node_modules')));
-app.get('/products', function (req, res) {
+app.use(compression());
+app.use('/', express.static(path.join(__dirname, 'public')));
+app.get('/api/products', function (req, res) {
     res.json(model_1.getProducts(req.query));
 });
-app.get('/products/:id', function (req, res) {
+app.get('/api/products/:id', function (req, res) {
     res.json(model_1.getProductById(parseInt(req.params.id)));
 });
-app.get('/products/:id/reviews', function (req, res) {
+app.get('/api/products/:id/reviews', function (req, res) {
     res.json(model_1.getReviewsByProductId(parseInt(req.params.id)));
 });
 var httpServer = app.listen(8000, 'localhost', function () {
     var _a = httpServer.address(), address = _a.address, port = _a.port;
-    console.log('Listening on %s %s', address, port);
+    console.log('Listening on %s:%s', address, port);
 });
 var wsServer = new ws_1.Server({ server: httpServer });
 wsServer.on('connection', function (ws) {

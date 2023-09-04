@@ -1,4 +1,5 @@
 import * as express from 'express';
+import * as compression from 'compression';
 import * as path from 'path';
 import {Server as HttpServer} from 'http';
 import {Server as WsServer} from 'ws';
@@ -6,24 +7,24 @@ import {Product, Review, getProducts, getProductById, getReviewsByProductId} fro
 
 const app = express();
 
-app.use('/',             express.static(path.join(__dirname, '..', 'client')));
-app.use('/node_modules', express.static(path.join(__dirname, '..', 'node_modules')));
+app.use(compression());
+app.use('/', express.static(path.join(__dirname, 'public')));
 
-app.get('/products', (req, res) => {
+app.get('/api/products', (req, res) => {
   res.json(getProducts(req.query));
 });
 
-app.get('/products/:id', (req, res) => {
+app.get('/api/products/:id', (req, res) => {
   res.json(getProductById(parseInt(req.params.id)));
 });
 
-app.get('/products/:id/reviews', (req, res) => {
+app.get('/api/products/:id/reviews', (req, res) => {
   res.json(getReviewsByProductId(parseInt(req.params.id)));
 });
 
 const httpServer: HttpServer = app.listen(8000, 'localhost', () => {
   const {address, port} = httpServer.address();
-  console.log('Listening on %s %s', address, port);
+  console.log('Listening on %s:%s', address, port);
 });
 
 const wsServer: WsServer = new WsServer({server: httpServer});

@@ -1,21 +1,21 @@
 export class Product {
   constructor(
-    public id: number,
-    public title: string,
-    public price: number,
-    public rating: number,
-    public description: string,
-    public categories: string[]) {}
+      public id: number,
+      public title: string,
+      public price: number,
+      public rating: number,
+      public description: string,
+      public categories: string[]) {}
 }
 
 export class Review {
   constructor(
-    public id: number,
-    public productId: number,
-    public timestamp: string,
-    public user: string,
-    public rating: number,
-    public comment: string) {}
+      public id: number,
+      public productId: number,
+      public timestamp: string,
+      public user: string,
+      public rating: number,
+      public comment: string) {}
 }
 
 export function getProducts(params = <any>{}): Product[] {
@@ -23,15 +23,15 @@ export function getProducts(params = <any>{}): Product[] {
 
   if (params.title) {
     result = result.filter(
-      p => p.title.toLowerCase().indexOf(params.title.toLowerCase()) !== -1);
+        p => p.title.toLowerCase().indexOf(params.title.toLowerCase()) !== -1);
   }
   if (parseInt(params.price) && result.length > 0) {
     result = result.filter(
-      p => p.price <= parseInt(params.price));
+        p => p.price <= parseInt(params.price));
   }
   if (params.category && result.length > 0) {
     result = result.filter(
-      p => p.categories.indexOf(params.category.toLowerCase()) !== -1);
+        p => p.categories.indexOf(params.category.toLowerCase()) !== -1);
   }
 
   return result;
@@ -46,14 +46,7 @@ export function getReviewsByProductId(productId: number): Review[] {
 }
 
 var products = [
-  {
-    "id": 0,
-    "title": 'First Product',
-    "price": 24.99,
-    "rating": 4.3,
-    "description": 'This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    "categories": ['electronics', 'hardware']
-  },
+  new Product(0, 'First Product', 24.99, 4.3, 'This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.', ['electronics', 'hardware']),
   {
     "id": 1,
     "title": "Second Product",
